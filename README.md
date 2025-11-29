@@ -1,4 +1,4 @@
-## From missed flight to mission: building a 24-hour reminder service on AWS
+##  From missed flight to mission: building a 24-hour reminder service on AWS
 
 
 A few months ago, my mom missed her flight. She’d been swamped all week, errands, and work. She thought the flight was later, got to the airport, it was too late her flight had gone. When she told me, I felt that gut drop of *“we could’ve avoided this.”* 
