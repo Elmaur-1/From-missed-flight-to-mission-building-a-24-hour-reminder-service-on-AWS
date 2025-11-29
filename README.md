@@ -1,4 +1,5 @@
-#From missed flight to mission: building a 24-hour reminder service on AWS
+## From missed flight to mission: building a 24-hour reminder service on AWS
+
 
 A few months ago, my mom missed her flight. She’d been swamped all week, errands, and work. She thought the flight was later, got to the airport, it was too late her flight had gone. When she told me, I felt that gut drop of *“we could’ve avoided this.”* 
 
@@ -23,7 +24,9 @@ That one moment turned into this project.
 
 ##  Step-by-Step Walkthrough
 
+
 ### Create the DynamoDB Table
+
 - **Table name:** `Appointment` 
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tkutd7m850e4lsd0z8ag.png)
@@ -40,6 +43,7 @@ That one moment turned into this project.
 
 
 ### 2. Create the SNS Topic and Subscribe
+
 - **Topic name:** `AppointmentReminders` (Standard) 
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/58ldbzzi4gl6y761hyp7.png)
@@ -55,7 +59,9 @@ That one moment turned into this project.
 ## Create the Lambda Function (Node.js)
 
 
+
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dueeim8gwpv8di52oiek.png)
+
 
 
 - Runtime:** Node.js 18.x  
@@ -68,38 +74,53 @@ That one moment turned into this project.
 
 
 ## Give Lambda the Right IAM Permissions
+
+
 Attach a minimal inline policy to your Lambda’s execution role:
+
 
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dalc45h1dbzpzb9f77f6.png)
 
+
+
 ** choosing the specific action that the resources in DynamoDB will need.
+
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yhwh7v186b9dndoyefh3.png)
 
  ** And for SNS
 
+
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/148fv4e4vtqqrl7vaptj.png)
 
 
+
 ** After that is done give a to the policy.
+
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yhw4e91ekqlvoanrxcei.png)
 
 
 ** Review and click create.
 
+
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cz8ubvjiuzpvu06dtp0i.png)
+
 
 
 ## Add a test item in DynamoDB:
 
 
+
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zcz5u6s8byd2c8lol794.png)
+
 
 ## Run Lambda → Test event
 
+
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/13v7k8clp98hyes1l4l7.png)
+
 
 
 ## **Result** I tested with a dentist appointment and received an email reminder no more last-minute panics.   .
@@ -110,6 +131,10 @@ Attach a minimal inline policy to your Lambda’s execution role:
 
 
 ## 🚀 what I learned
+
+
+
+
 +-----------------------+           +---------------------------+
 |   User adds item      |           |   EventBridge (schedule)  |
 |  (appointment input)  |           |       rate(1 day)         |
@@ -130,11 +155,14 @@ Attach a minimal inline policy to your Lambda’s execution role:
               +---------+-----------+   +------------------------+
 
 
+
+
 what this project solve Forgetting is easy; systems aren’t.
 24-hour timing gives you enough time to prepare.
 The missed flight hurt, but it sparked something useful: a small, dependable system that gives you a 24-hour heads up for what matters. You don’t need a huge platform just a table, a function, a topic, and a schedule.
 
 ** Cloud skills solving everyday problems.**
+
 This is my Devops/cloud engineering journey.
 
 
